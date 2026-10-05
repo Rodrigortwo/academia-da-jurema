@@ -18,7 +18,8 @@
   function cardDe(curso) {
     const el = document.createElement("button");
     el.className = "card capa-" + (curso.capa || "mata");
-    el.setAttribute("aria-label", curso.titulo + " — " + curso.mestre);
+    /* sem aria-label: o conteúdo interno (selo, título, mestre, preço)
+       forma o nome acessível completo */
     el.innerHTML =
       (curso.emBreve ? '<span class="selo">EM BREVE</span>' : "") +
       '<span class="card-titulo">' + curso.titulo + "</span>" +
@@ -87,12 +88,15 @@
     observador.observe(el);
   });
 
-  /* ---------- BUSCA ---------- */
+  /* ---------- BUSCA (indiferente a acentos: "catimbo" acha "Catimbó") ---------- */
+  function semAcento(s) {
+    return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+  }
   busca.addEventListener("input", () => {
-    const q = busca.value.trim().toLowerCase();
+    const q = semAcento(busca.value.trim());
     if (!q) return render(CURSOS);
     render(CURSOS.filter(c =>
-      (c.titulo + " " + c.mestre + " " + c.categoria + " " + c.descricao).toLowerCase().includes(q)
+      semAcento(c.titulo + " " + c.mestre + " " + c.categoria + " " + c.descricao).includes(q)
     ));
   });
 
@@ -127,16 +131,37 @@
     }
     modal.hidden = false;
     document.body.style.overflow = "hidden";
+
+    /* foco vai para o modal; guarda quem abriu para devolver ao fechar */
+    focoAnterior = document.activeElement;
+    botaoFechar.focus();
   }
+
+  let focoAnterior = null;
+  const botaoFechar = document.getElementById("modal-fechar");
 
   function fecharModal() {
     modal.hidden = true;
     document.body.style.overflow = "";
+    if (focoAnterior && document.contains(focoAnterior)) focoAnterior.focus();
+    focoAnterior = null;
   }
 
-  document.getElementById("modal-fechar").addEventListener("click", fecharModal);
+  botaoFechar.addEventListener("click", fecharModal);
   modal.addEventListener("click", e => { if (e.target === modal) fecharModal(); });
-  document.addEventListener("keydown", e => { if (e.key === "Escape" && !modal.hidden) fecharModal(); });
+  document.addEventListener("keydown", e => {
+    if (modal.hidden) return;
+    if (e.key === "Escape") { fecharModal(); return; }
+    /* prende o Tab dentro do modal enquanto aberto */
+    if (e.key === "Tab") {
+      const focaveis = [...modal.querySelectorAll("button, a[href]")].filter(n => n.offsetParent !== null);
+      if (!focaveis.length) return;
+      const primeiro = focaveis[0];
+      const ultimo = focaveis[focaveis.length - 1];
+      if (e.shiftKey && document.activeElement === primeiro) { e.preventDefault(); ultimo.focus(); }
+      else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primeiro.focus(); }
+    }
+  });
 
   /* ---------- primeira renderização ---------- */
   render(CURSOS);
