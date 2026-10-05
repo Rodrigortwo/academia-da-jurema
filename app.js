@@ -45,12 +45,47 @@
       cursos.forEach(c => trilho.appendChild(cardDe(c)));
       sec.appendChild(h);
       sec.appendChild(trilho);
+      adicionarSetas(sec, trilho);
+      sec.classList.add("reveal");
       catalogo.appendChild(sec);
+      observador.observe(sec);
     }
     if (!catalogo.children.length) {
       catalogo.innerHTML = '<p style="padding:20px 4vw;color:#b9b2a3">Nenhum curso encontrado.</p>';
     }
   }
+
+  /* ---------- SETAS DAS FILEIRAS ---------- */
+  function adicionarSetas(sec, trilho) {
+    const passo = () => Math.max(trilho.clientWidth * 0.8, 240);
+    const esq = document.createElement("button");
+    esq.className = "seta seta-esq";
+    esq.innerHTML = "‹";
+    esq.setAttribute("aria-label", "Cursos anteriores");
+    esq.addEventListener("click", () => trilho.scrollBy({ left: -passo(), behavior: "smooth" }));
+    const dir = document.createElement("button");
+    dir.className = "seta seta-dir";
+    dir.innerHTML = "›";
+    dir.setAttribute("aria-label", "Próximos cursos");
+    dir.addEventListener("click", () => trilho.scrollBy({ left: passo(), behavior: "smooth" }));
+    sec.appendChild(esq);
+    sec.appendChild(dir);
+  }
+
+  /* ---------- ANIMAÇÃO DE ENTRADA ---------- */
+  const observador = new IntersectionObserver(entradas => {
+    entradas.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add("visivel");
+        observador.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll(".faixa-manifesto, .parceiro-card, .rodape").forEach(el => {
+    el.classList.add("reveal");
+    observador.observe(el);
+  });
 
   /* ---------- BUSCA ---------- */
   busca.addEventListener("input", () => {
