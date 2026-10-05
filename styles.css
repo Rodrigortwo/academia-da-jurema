@@ -1,0 +1,196 @@
+/* ============ ACADEMIA DA JUREMA — estilo "vitrine de streaming" ============ */
+:root {
+  --fundo: #0a0a0c;
+  --painel: #141418;
+  --painel-2: #1c1c22;
+  --ouro: #d4a13a;
+  --ouro-claro: #e8c069;
+  --mata: #2e7d4f;
+  --texto: #f2ead8;
+  --texto-suave: #b9b2a3;
+  --raio: 10px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.55;
+}
+
+/* ---------- topo ---------- */
+.topo {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  display: flex; align-items: center; gap: 24px;
+  padding: 14px 4vw;
+  background: linear-gradient(180deg, rgba(10,10,12,.95), rgba(10,10,12,.75) 70%, transparent);
+  backdrop-filter: blur(6px);
+}
+.logo {
+  font-weight: 800; letter-spacing: .14em; font-size: 1.05rem;
+  color: var(--ouro); text-decoration: none; white-space: nowrap;
+}
+.logo span { color: var(--texto); font-weight: 600; }
+.nav { display: flex; gap: 18px; }
+.nav a { color: var(--texto-suave); text-decoration: none; font-size: .92rem; }
+.nav a:hover { color: var(--texto); }
+.busca-wrap { margin-left: auto; }
+.busca {
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+  color: var(--texto); border-radius: 999px; padding: 8px 16px; width: 230px;
+  font-size: .9rem; outline: none; transition: all .2s;
+}
+.busca:focus { border-color: var(--ouro); width: 280px; }
+
+/* ---------- hero ---------- */
+.hero {
+  position: relative; min-height: 78vh;
+  display: flex; align-items: flex-end;
+  padding: 120px 4vw 70px;
+  background:
+    radial-gradient(1100px 500px at 85% -10%, rgba(212,161,58,.25), transparent 60%),
+    radial-gradient(900px 600px at 10% 20%, rgba(46,125,79,.35), transparent 60%),
+    linear-gradient(160deg, #10150f 0%, #0c0f0d 45%, var(--fundo) 100%);
+}
+.hero-veu {
+  position: absolute; inset: auto 0 0 0; height: 140px;
+  background: linear-gradient(180deg, transparent, var(--fundo));
+  pointer-events: none;
+}
+.hero-conteudo { max-width: 620px; position: relative; z-index: 2; }
+.hero-chapeu { color: var(--ouro); letter-spacing: .25em; font-size: .75rem; font-weight: 700; margin-bottom: 10px; }
+.hero-titulo { font-size: clamp(1.9rem, 4.5vw, 3.4rem); line-height: 1.12; margin-bottom: 10px; }
+.hero-mestre { color: var(--ouro-claro); font-weight: 600; margin-bottom: 14px; }
+.hero-desc { color: var(--texto-suave); font-size: 1.05rem; margin-bottom: 26px; max-width: 54ch; }
+.hero-acoes { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* ---------- botões ---------- */
+.btn {
+  display: inline-block; border: 0; cursor: pointer; text-decoration: none;
+  padding: 12px 26px; border-radius: 6px; font-size: .95rem; font-weight: 700;
+  transition: transform .15s, filter .15s;
+}
+.btn:hover { transform: translateY(-1px); filter: brightness(1.08); }
+.btn-ouro { background: linear-gradient(135deg, var(--ouro), #b8842a); color: #1a1407; }
+.btn-ghost { background: rgba(255,255,255,.1); color: var(--texto); border: 1px solid rgba(255,255,255,.2); }
+.btn-grande { padding: 15px 36px; font-size: 1.02rem; }
+.btn[aria-disabled="true"] { opacity: .55; pointer-events: none; }
+
+/* ---------- faixa manifesto ---------- */
+.faixa-manifesto {
+  padding: 26px 4vw;
+  background: linear-gradient(90deg, rgba(46,125,79,.16), rgba(212,161,58,.10));
+  border-top: 1px solid rgba(212,161,58,.25);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.faixa-manifesto p { max-width: 980px; margin: 0 auto; color: var(--texto-suave); text-align: center; font-size: .98rem; }
+.faixa-manifesto strong, .faixa-manifesto em { color: var(--texto); }
+
+/* ---------- catálogo / fileiras ---------- */
+.catalogo { padding: 34px 0 20px; }
+.fileira { margin-bottom: 36px; }
+.fileira h2 {
+  padding: 0 4vw 12px; font-size: 1.25rem; letter-spacing: .02em;
+}
+.trilho {
+  display: flex; gap: 14px; overflow-x: auto; padding: 4px 4vw 14px;
+  scroll-snap-type: x mandatory; scrollbar-width: thin;
+}
+.trilho::-webkit-scrollbar { height: 8px; }
+.trilho::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); border-radius: 4px; }
+
+/* ---------- card (poster) ---------- */
+.card {
+  position: relative; flex: 0 0 210px; aspect-ratio: 2/3;
+  border-radius: var(--raio); overflow: hidden; cursor: pointer;
+  scroll-snap-align: start;
+  transition: transform .22s ease, box-shadow .22s ease;
+  border: 1px solid rgba(255,255,255,.07);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 16px; text-align: left; color: var(--texto); background: var(--painel);
+}
+.card:hover, .card:focus-visible {
+  transform: scale(1.055); z-index: 3;
+  box-shadow: 0 14px 40px rgba(0,0,0,.6), 0 0 0 1px rgba(212,161,58,.4);
+  outline: none;
+}
+.card::after { /* véu para legibilidade */
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,.78) 85%);
+}
+.card-titulo { position: relative; z-index: 2; font-weight: 800; font-size: 1.02rem; line-height: 1.25; }
+.card-mestre { position: relative; z-index: 2; color: var(--ouro-claro); font-size: .8rem; margin-top: 6px; }
+.card-preco { position: relative; z-index: 2; color: var(--texto-suave); font-size: .8rem; margin-top: 4px; }
+
+.selo {
+  position: absolute; top: 12px; right: 12px; z-index: 4;
+  background: var(--ouro); color: #1a1407; font-size: .66rem; font-weight: 800;
+  letter-spacing: .08em; padding: 4px 9px; border-radius: 4px;
+}
+
+/* capas em gradiente (sem imagem = leve e elegante) */
+.capa-ouro  { background: linear-gradient(160deg, #3d2d0d, #936c1e 60%, #d4a13a); }
+.capa-mata  { background: linear-gradient(160deg, #0d2417, #1d5435 60%, #2e7d4f); }
+.capa-terra { background: linear-gradient(160deg, #26150c, #6b3c1c 60%, #a05f2c); }
+.capa-noite { background: linear-gradient(160deg, #0c1026, #23305e 60%, #3d54a0); }
+.capa-fogo  { background: linear-gradient(160deg, #26090b, #7a1f1a 60%, #c0452b); }
+.capa-agua  { background: linear-gradient(160deg, #06202a, #0e5160 60%, #1a8a96); }
+
+/* ---------- parceiros ---------- */
+.parceiros { padding: 70px 4vw 80px; text-align: center; background: var(--painel); }
+.parceiros h2 { font-size: 1.8rem; margin-bottom: 8px; }
+.parceiros-sub { color: var(--texto-suave); margin-bottom: 36px; }
+.parceiros-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 18px; max-width: 1050px; margin: 0 auto 36px;
+}
+.parceiro-card {
+  background: var(--painel-2); border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--raio); padding: 26px 22px; text-align: left;
+}
+.parceiro-card h3 { margin-bottom: 10px; font-size: 1.05rem; }
+.parceiro-card p { color: var(--texto-suave); font-size: .93rem; }
+
+/* ---------- rodapé ---------- */
+.rodape { padding: 40px 4vw 60px; text-align: center; border-top: 1px solid rgba(255,255,255,.07); }
+.rodape-nota { color: var(--texto-suave); font-size: .85rem; max-width: 760px; margin: 10px auto 0; }
+
+/* ---------- modal ---------- */
+.modal-fundo {
+  position: fixed; inset: 0; z-index: 90;
+  background: rgba(0,0,0,.75); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center; padding: 4vw;
+}
+.modal {
+  position: relative; width: min(680px, 100%); max-height: 88vh; overflow-y: auto;
+  background: var(--painel); border: 1px solid rgba(255,255,255,.1);
+  border-radius: 14px; box-shadow: 0 30px 80px rgba(0,0,0,.7);
+}
+.modal-capa { position: relative; height: 180px; border-radius: 14px 14px 0 0; }
+.modal-fechar {
+  position: absolute; top: 12px; right: 12px; z-index: 5;
+  background: rgba(0,0,0,.55); color: #fff; border: 0; border-radius: 50%;
+  width: 36px; height: 36px; font-size: 1rem; cursor: pointer;
+}
+.modal-corpo { padding: 26px 30px 30px; }
+.modal-corpo h2 { font-size: 1.5rem; margin-bottom: 4px; }
+.modal-mestre { color: var(--ouro-claro); font-weight: 600; margin-bottom: 14px; }
+.modal-desc { color: var(--texto-suave); margin-bottom: 20px; }
+.modal-corpo h3 { font-size: 1rem; letter-spacing: .04em; margin-bottom: 10px; color: var(--ouro); }
+.modal-corpo ul { list-style: none; margin-bottom: 26px; }
+.modal-corpo li { padding: 7px 0 7px 28px; position: relative; color: var(--texto); font-size: .95rem; border-bottom: 1px dashed rgba(255,255,255,.07); }
+.modal-corpo li::before { content: "🌿"; position: absolute; left: 0; }
+.modal-acao { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.modal-preco { font-size: 1.5rem; font-weight: 800; color: var(--ouro-claro); }
+
+/* ---------- responsivo ---------- */
+@media (max-width: 720px) {
+  .nav { display: none; }
+  .busca { width: 150px; }
+  .busca:focus { width: 180px; }
+  .hero { min-height: 64vh; padding-top: 100px; }
+  .card { flex-basis: 158px; }
+  .modal-corpo { padding: 20px; }
+}

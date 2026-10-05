@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Academia da Jurema</title>
+  <meta name="description" content="Academia da Jurema — cursos de mestres e mestras juremeiros. A ciência ensinada por quem vive a tradição." />
+  <meta property="og:title" content="Academia da Jurema" />
+  <meta property="og:description" content="Cursos de mestres e mestras juremeiros. A ciência ensinada por quem vive a tradição." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="topo" id="topo">
+    <a class="logo" href="#">ACADEMIA<span> DA JUREMA</span></a>
+    <nav class="nav">
+      <a href="#catalogo">Cursos</a>
+      <a href="#parceiros">Seja um Mestre Parceiro</a>
+    </nav>
+    <div class="busca-wrap">
+      <input id="busca" class="busca" type="search" placeholder="Buscar curso ou mestre…" aria-label="Buscar curso ou mestre" />
+    </div>
+  </header>
+
+  <!-- HERO (preenchido pelo app.js com o curso destaque) -->
+  <section class="hero" id="hero" aria-label="Curso em destaque">
+    <div class="hero-conteudo">
+      <p class="hero-chapeu">CURSO EM DESTAQUE</p>
+      <h1 class="hero-titulo" id="hero-titulo">Academia da Jurema</h1>
+      <p class="hero-mestre" id="hero-mestre"></p>
+      <p class="hero-desc" id="hero-desc">A ciência ensinada por quem vive a tradição.</p>
+      <div class="hero-acoes">
+        <button class="btn btn-ouro" id="hero-btn">Ver curso</button>
+        <a class="btn btn-ghost" href="#parceiros">Sou mestre e quero ensinar</a>
+      </div>
+    </div>
+    <div class="hero-veu"></div>
+  </section>
+
+  <!-- MANIFESTO CURTO -->
+  <section class="faixa-manifesto">
+    <p><strong>Aqui quem ensina é quem vive.</strong> Cada curso é de um mestre ou mestra de tradição, remunerado de forma justa e transparente. Cada mestre ensina <em>o que escolhe ensinar</em> — fundamento de casa não se vende, se recebe. E parte de cada venda sustenta um fundo de apoio às casas de Jurema.</p>
+  </section>
+
+  <!-- CATÁLOGO (fileiras geradas pelo app.js) -->
+  <main id="catalogo" class="catalogo" aria-label="Catálogo de cursos"></main>
+
+  <!-- SEJA UM MESTRE PARCEIRO -->
+  <section class="parceiros" id="parceiros">
+    <h2>Seja um Mestre Parceiro</h2>
+    <p class="parceiros-sub">A Academia existe para que o conhecimento dos mais velhos sustente quem o guarda.</p>
+    <div class="parceiros-grid">
+      <div class="parceiro-card">
+        <h3>💰 Remuneração justa</h3>
+        <p>Divisão clara, contrato simples e repasse transparente. O mestre vê quanto vendeu e quanto recebe — sem letra miúda.</p>
+      </div>
+      <div class="parceiro-card">
+        <h3>🎥 A gente produz com você</h3>
+        <p>Gravação, edição, arte e divulgação são por nossa conta. O mestre entra com o que ninguém mais tem: a ciência e a vivência.</p>
+      </div>
+      <div class="parceiro-card">
+        <h3>🌿 O fundamento é seu</h3>
+        <p>Cada mestre ensina só o que escolhe tornar público. A Academia não pede segredo de casa — e parte de cada venda vai para o fundo de apoio às casas.</p>
+      </div>
+    </div>
+    <a class="btn btn-ouro btn-grande" href="mailto:contato@cienciadajurema.com.br?subject=Quero%20ser%20mestre%20parceiro%20da%20Academia%20da%20Jurema">Quero ensinar na Academia</a>
+  </section>
+
+  <footer class="rodape">
+    <p><strong>Academia da Jurema</strong> — um projeto da Ciência da Jurema Sagrada.</p>
+    <p class="rodape-nota">Os cursos são formação cultural e devocional ministrada por mestres de tradição. Nenhum curso promete resultado espiritual, substitui orientação de uma casa ou revela fundamento reservado. Salve a Jurema Sagrada! 🌿</p>
+  </footer>
+
+  <!-- MODAL DO CURSO -->
+  <div class="modal-fundo" id="modal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+      <button class="modal-fechar" id="modal-fechar" aria-label="Fechar">✕</button>
+      <div class="modal-capa" id="modal-capa"><span id="modal-selo" class="selo" hidden>EM BREVE</span></div>
+      <div class="modal-corpo">
+        <h2 id="modal-titulo"></h2>
+        <p class="modal-mestre" id="modal-mestre"></p>
+        <p class="modal-desc" id="modal-desc"></p>
+        <h3>O que você vai aprender</h3>
+        <ul id="modal-aprende"></ul>
+        <div class="modal-acao">
+          <span class="modal-preco" id="modal-preco"></span>
+          <a class="btn btn-ouro" id="modal-comprar" href="#" target="_blank" rel="noopener">Quero este curso</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="cursos.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
